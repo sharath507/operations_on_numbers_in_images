@@ -46,3 +46,43 @@ cv2.destroyAllWindows()
 # Print the recognized numbers in array format
 print("Recognized Numbers in Array Format:")
 print(numbers_array)
+
+
+# New code (OCR, cleaning, and dynamic operations)
+def evaluate_operation(array, operation):
+    try:
+        numbers = []
+        for item in array:
+            if '/' in item:
+                numerator, denominator = item.split('/')
+                numbers.append(float(numerator) / float(denominator))
+            else:
+                numbers.append(float(item))
+        
+        if operation == 'add':
+            result = sum(numbers)
+        elif operation == 'subtract':
+            result = numbers[0] - sum(numbers[1:])
+        elif operation == 'multiply':
+            result = 1
+            for num in numbers:
+                result *= num
+        elif operation == 'divide':
+            result = numbers[0]
+            for num in numbers[1:]:
+                if num == 0:
+                    raise ZeroDivisionError("Division by zero is not allowed.")
+                result /= num
+        else:
+            raise ValueError("Invalid operation.")
+        
+        return result
+    except Exception as e:
+        return f"Error: {e}"
+
+# Ask the user for the operation
+operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+
+# Perform the operation and display the result
+result = evaluate_operation(numbers_array, operation)
+print(f"Result of {operation}: {result}")
