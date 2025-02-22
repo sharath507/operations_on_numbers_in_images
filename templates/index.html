@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    
+    <!-- File upload form -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload and Process</button>
+    </form>
+
+    <!-- Display results -->
+    {% if result %}
+        <h2>Results:</h2>
+        <p>Original Size: {{ result }}</p>
+        <p>Resized Size: {{ result.resized_size }}</p>
+        <p>Processed Image:</p>
+        <img src="{{ result.processed_image_url }}" alt="Processed Image" style="max-width: 500px;">
+    {% endif %}
+</body>
+</html>
