@@ -34,7 +34,7 @@ def home():
         result = input_image(file_path)
         
         # Render the result on the screen
-        return render_template("index.html", result=result)
+        return render_template("index.html", result=result,image_url = file_path)
     
     # Render the upload form for GET requests
     return render_template("index.html", result=None)
